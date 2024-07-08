@@ -1,0 +1,21 @@
+{
+    "name": "lienebriede/php-project",
+    "description": "A PHP project demonstrating OOP principles and Firebase integration.",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/",
+            "Kreait\\Firebase\\": "vendor/kreait/firebase-php/src/Firebase"
+        }
+    },
+    "authors": [
+        {
+            "name": "Liene Briede",
+            "email": "lienebriede84@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "kreait/firebase-php": "^7.13"
+    }
+}
