@@ -72,7 +72,6 @@ class ComposerStaticInit226ea7802e5b8c12bab110f16bd58d3a
             'Google\\Api\\' => 11,
             'Google\\ApiCore\\LongRunning\\' => 27,
             'Google\\ApiCore\\' => 15,
-            'Gitpod\\ProjectRoot\\' => 19,
             'GPBMetadata\\Google\\Type\\' => 24,
             'GPBMetadata\\Google\\Rpc\\' => 23,
             'GPBMetadata\\Google\\Protobuf\\' => 28,
@@ -93,6 +92,10 @@ class ComposerStaticInit226ea7802e5b8c12bab110f16bd58d3a
             'Brick\\Math\\' => 11,
             'Beste\\Clock\\' => 12,
             'Beste\\Cache\\' => 12,
+        ),
+        'A' => 
+        array (
+            'App\\' => 4,
         ),
     );
 
@@ -119,8 +122,8 @@ class ComposerStaticInit226ea7802e5b8c12bab110f16bd58d3a
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -149,6 +152,7 @@ class ComposerStaticInit226ea7802e5b8c12bab110f16bd58d3a
         'Kreait\\Firebase\\' => 
         array (
             0 => __DIR__ . '/..' . '/kreait/firebase-php/src/Firebase',
+            1 => __DIR__ . '/..' . '/kreait/firebase-php/src/Firebase',
         ),
         'JmesPath\\' => 
         array (
@@ -222,10 +226,6 @@ class ComposerStaticInit226ea7802e5b8c12bab110f16bd58d3a
         array (
             0 => __DIR__ . '/..' . '/google/gax/src',
         ),
-        'Gitpod\\ProjectRoot\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
         'GPBMetadata\\Google\\Type\\' => 
         array (
             0 => __DIR__ . '/..' . '/google/common-protos/metadata/Type',
@@ -281,6 +281,10 @@ class ComposerStaticInit226ea7802e5b8c12bab110f16bd58d3a
         'Beste\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/beste/in-memory-cache/src',
+        ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
