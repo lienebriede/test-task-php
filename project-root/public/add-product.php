@@ -35,13 +35,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Add Product</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junior Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <h1>Product Add</h1>
+
+<body class="d-flex flex-column h-100 container-lg">
+    <div class="mt-5">
+        <div class="row align-items-center">
+            <div class="col">
+                <h1>Product Add</h1>
+            </div>
+            <div class="col-auto">
+                <button id="submitButton" type="submit" class="btn btn-primary">Save</button>
+                <button id="cancelButton" type="button" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <hr>
     <form method="POST" action="add-product.php">
         <label for="sku">SKU:</label>
         <input type="text" id="sku" name="sku" required><br>
@@ -82,14 +101,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <button type="submit">Add Product</button>
     </form>
-
-    <script>
-        document.getElementById('type').addEventListener('change', function() {
-            var type = this.value;
-            document.getElementById('bookFields').style.display = (type === 'Book') ? 'block' : 'none';
-            document.getElementById('dvdFields').style.display = (type === 'DVD') ? 'block' : 'none';
-            document.getElementById('furnitureFields').style.display = (type === 'Furniture') ? 'block' : 'none';
-        });
-    </script>
+    <hr>
+    <footer class="footer">
+        <p class="text-center mt-4">Scandiweb Test assignment</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

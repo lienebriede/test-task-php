@@ -1,0 +1,33 @@
+:root {
+    --font-color: #3a3b3c;
+    --light-grey: #f8f9fa;
+    --teal: #007a86;
+    --darker-teal: #005f73;
+}
+
+body {
+    background-color: var(--light-grey);
+    color: var(--font-color);
+}
+
+hr {
+    background-color: var(--teal);
+    height: 2px;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn {
+    border-radius: 0;
+    padding: 10px 20px;
+    margin: 5px;
+}
+
+.btn-primary {
+    background-color: var(--teal);
+    border: var(--teal);
+}
+
+.btn-primary:hover {
+    background-color: var(--darker-teal);
+}
