@@ -5,9 +5,23 @@
     --darker-teal: #005f73;
 }
 
+html,
+body {
+    height: 100%;
+}
+
 body {
     background-color: var(--light-grey);
     color: var(--font-color);
+}
+
+
+.content {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
 }
 
 hr {
@@ -30,4 +44,12 @@ hr {
 
 .btn-primary:hover {
     background-color: var(--darker-teal);
+}
+
+.size-input {
+    display: none;
+}
+
+.teal-text {
+    color: var(--teal);
 }

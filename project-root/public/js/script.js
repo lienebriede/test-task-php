@@ -1,6 +1,21 @@
-document.getElementById('type').addEventListener('change', function () {
-    var type = this.value;
-    document.getElementById('bookFields').style.display = (type === 'Book') ? 'block' : 'none';
-    document.getElementById('dvdFields').style.display = (type === 'DVD') ? 'block' : 'none';
-    document.getElementById('furnitureFields').style.display = (type === 'Furniture') ? 'block' : 'none';
+// Type switcher function
+
+document.getElementById('productType').addEventListener('change', function () {
+    switchType.call(this);
 });
+
+function switchType() {
+    const type = this.value;
+    const types = ['Book', 'DVD', 'Furniture'];
+
+    types.forEach(function (item) {
+        const element = document.getElementById(item);
+        if (item === type) {
+            element.classList.remove('d-none');
+            element.classList.add('d-block');
+        } else {
+            element.classList.remove('d-block');
+            element.classList.add('d-none');
+        }
+    });
+}
