@@ -63,22 +63,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <hr>
         <form method="POST" action="add-product.php" id="product_form" class="pt-5">
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label for="sku" class="col-2 col-form-label">SKU</label>
                 <div class="col-6">
-                    <input type="text" class="form-control" id="sku" name="sku" required><br>
+                    <input type="text" class="form-control" id="sku" name="sku" required>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label for="name" class="col-2 col-form-label">Name</label>
                 <div class="col-6">
-                    <input type="text" class="form-control" id="name" name="name" required><br>
+                    <input type="text" class="form-control" id="name" name="name" required>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-group row mb-3">
                 <label for="price" class="col-2 col-form-label">Price($)</label>
                 <div class="col-6">
-                    <input type="text" class="form-control" id="price" name="price" required><br>
+                    <input type="text" class="form-control" id="price" name="price" required>
                 </div>
             </div>
 
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div id="DVD" class="d-none pt-3">
-                <p class="teal-text">Please provide size</p>
+                <p><strong>Please provide size:</strong></p>
                 <div class="form-group row">
                     <label for="size" class="col-3 col-form-label">Size (MB)</label>
                     <div class="col-3">
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div id="Furniture" class="d-none pt-3">
-                <p class="teal-text">Please provide dimensions</p>
+                <p><strong>Please provide dimensions:</strong></p>
                 <div class="form-group row mb-3">
                     <label for="height" class="col-3 col-form-label">Height (CM)</label>
                     <div class="col-3">
@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             
             <div id="Book" class="d-none pt-3">
-                <p class="teal-text">Please provide weight</p>
+                <p><strong>Please provide weight:</strong></p>
                 <div class="form-group row">
                     <label for="weight" class="col-3 col-form-label">Weight (KG)</label>
                     <div class="col-3">
