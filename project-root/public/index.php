@@ -57,7 +57,7 @@ foreach ($productsSnapshot->getValue() as $product) {
                 <?php foreach ($products as $product): ?>
                     <div class="col">
                         <div class="card h-100">
-                            <input type="checkbox" class="text-left ms-2 mt-2 form-check-input delete-checkbox">
+                            <input type="checkbox" name="delete_ids[]" value="<?php echo $product->getSku(); ?>" class="text-left ms-2 mt-2 form-check-input delete-checkbox">
                             <div class="card-body text-center mb-3">
                                 <?php echo $product->display(); ?>
                             </div>

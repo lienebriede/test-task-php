@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const cancelButton = document.getElementById('cancelButton');
     const skuInput = document.getElementById('sku');
     const skuError = document.getElementById('skuError');
+    const massDeleteButton = document.getElementById('massDeleteButton');
+    const checkboxes = document.querySelectorAll('.delete-checkbox');
 
     const typeFields = {
         'DVD': ['size'],
@@ -84,6 +86,48 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    /** Mass delete btn */
+    if (massDeleteButton) {
+        massDeleteButton.addEventListener('click', function () {
+            const deleteIds = [];
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    deleteIds.push(checkbox.value);
+                }
+            });
+
+            if (deleteIds.length === 0) {
+                console.log('No products selected for deletion.');
+                return;
+            }
+
+            deleteProducts(deleteIds);
+        });
+    }
+
+    function deleteProducts(ids) {
+        fetch('delete-products.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                mass_delete: true,
+                delete_ids: ids
+            }),
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Products deleted successfully.');
+                    location.reload(); // Reload the page to reflect changes
+                } else {
+                    throw new Error('Failed to delete products.');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting products:', error);
+            });
+    }
 
     /** Save btn */
     if (submitButton) {

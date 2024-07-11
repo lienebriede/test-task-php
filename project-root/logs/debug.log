@@ -190,3 +190,11 @@
 2024-07-11 13:53:31 - Database initialized
 2024-07-11 13:53:31 - SKU: HP0001
 2024-07-11 13:53:31 - SKU Exists: false
+2024-07-11 14:47:40 - Error: Invalid request method or missing parameters
+2024-07-11 14:49:09 - Error: Missing parameters: mass_delete or delete_ids
+2024-07-11 14:50:18 - Error: Missing parameters: mass_delete or delete_ids
+2024-07-11 14:56:12 - Product with SKU HP020 deleted successfully
+2024-07-11 14:56:12 - Product with SKU HP0001 deleted successfully
+2024-07-11 14:56:31 - Product with SKU HP010 deleted successfully
+2024-07-11 14:56:31 - Product with SKU HP011 deleted successfully
+2024-07-11 14:56:40 - Product with SKU dd deleted successfully
