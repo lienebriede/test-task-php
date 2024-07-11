@@ -1,8 +1,11 @@
 RewriteEngine On
 
 # Redirect requests to the public folder
-RewriteRule ^$ public/ [L]
-RewriteRule (.*) public/$1 [L]
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ /public/$1 [L]
 
+# Handle directory index
 DirectoryIndex index.php
+
+# Prevent directory listings
 Options -Indexes
