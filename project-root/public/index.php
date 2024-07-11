@@ -5,8 +5,26 @@ use App\Book;
 use App\DVD;
 use App\Furniture;
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Logging for debugging purposes
+error_log('Script started: ' . date('Y-m-d H:i:s'));
+error_log('Current directory: ' . __DIR__);
+
 $firebaseCredentialsPath = getenv('GOOGLE_APPLICATION_CREDENTIALS');
 $firebaseDatabaseUrl = getenv('FIREBASE_DATABASE_URL');
+
+// Logging Firebase credentials path and database URL
+error_log('GOOGLE_APPLICATION_CREDENTIALS: ' . getenv('GOOGLE_APPLICATION_CREDENTIALS'));
+error_log('FIREBASE_DATABASE_URL: ' . getenv('FIREBASE_DATABASE_URL'));
+
+// Check if credentials file exists and is readable
+if (!is_readable($firebaseCredentialsPath)) {
+    error_log('Firebase credentials file is not readable: ' . $firebaseCredentialsPath);
+    die('Firebase credentials file is not readable.');
+}
 
 $factory = (new Factory)
     ->withServiceAccount($firebaseCredentialsPath)
