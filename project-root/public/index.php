@@ -1,5 +1,5 @@
 <?php
-require '/../vendor/autoload.php';
+require '../vendor/autoload.php';
 use Kreait\Firebase\Factory;
 use App\Book;
 use App\DVD;
@@ -13,8 +13,9 @@ error_reporting(E_ALL);
 error_log('Script started: ' . date('Y-m-d H:i:s'));
 error_log('Current directory: ' . __DIR__);
 
-$firebaseCredentialsPath = __DIR__ . '/../../google-service-account.json';
+$firebaseCredentialsPath = __DIR__ . '/../google-service-account.json';
 $firebaseDatabaseUrl = getenv('FIREBASE_DATABASE_URL');
+
 
 // Check if credentials file exists and is readable
 if (!is_readable($firebaseCredentialsPath)) {

@@ -1,11 +1,11 @@
 <?php
-require '/../vendor/autoload.php';
+require '../vendor/autoload.php';
 use Kreait\Firebase\Factory;
 use App\Book;
 use App\DVD;
 use App\Furniture;
 
-$firebaseCredentialsPath = __DIR__ . '/../../google-service-account.json';
+$firebaseCredentialsPath = __DIR__ . '/../google-service-account.json';
 $firebaseDatabaseUrl = getenv('FIREBASE_DATABASE_URL');
 
 $factory = (new Factory)
