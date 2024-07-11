@@ -1,5 +1,11 @@
 <?php
-require '../vendor/autoload.php';
+if (getenv('ENVIRONMENT') === 'local') {
+    require '../vendor/autoload.php'; // Local environment
+    $firebaseCredentialsPath = __DIR__ . '/../google-service-account.json';
+} else {
+    require __DIR__ . '/../vendor/autoload.php'; // Heroku or production environment
+    $firebaseCredentialsPath = getenv('GOOGLE_APPLICATION_CREDENTIALS');
+}
 use Kreait\Firebase\Factory;
 use App\Book;
 use App\DVD;
