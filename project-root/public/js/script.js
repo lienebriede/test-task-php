@@ -1,22 +1,45 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    /** Type switcher function */
-    document.getElementById('productType').addEventListener('change', function () {
-        switchType.call(this);
+    const productTypeSelect = document.getElementById('productType');
+    const submitButton = document.getElementById('submitButton');
+    const cancelButton = document.getElementById('cancelButton');
+    const typeFields = {
+        'DVD': ['size'],
+        'Furniture': ['height', 'width', 'length'],
+        'Book': ['weight']
+    };
+
+    productTypeSelect.addEventListener('change', function () {
+        switchType(this.value);
     });
 
-    function switchType() {
-        const type = this.value;
-        const types = ['Book', 'DVD', 'Furniture'];
+    /** Type switcher function */
+    function switchType(selectedType) {
+        const types = Object.keys(typeFields);
 
-        types.forEach(function (item) {
-            const element = document.getElementById(item);
-            if (item === type) {
+        types.forEach(function (type) {
+            const element = document.getElementById(type);
+            if (type === selectedType) {
                 element.classList.remove('d-none');
                 element.classList.add('d-block');
+                toggleRequiredFields(typeFields[type], true);
             } else {
                 element.classList.remove('d-block');
                 element.classList.add('d-none');
+                toggleRequiredFields(typeFields[type], false);
+            }
+        });
+    }
+    /** Manage required attribute */
+    function toggleRequiredFields(fields, required) {
+        fields.forEach(function (fieldId) {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                if (required) {
+                    field.setAttribute('required', 'required');
+                } else {
+                    field.removeAttribute('required');
+                }
             }
         });
     }
@@ -25,9 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function validateForm() {
         let isValid = true;
         const requiredFields = document.querySelectorAll('#product_form [required]');
-
-        const notifications = document.querySelectorAll('.notification');
-        notifications.forEach(notification => notification.remove());
 
         requiredFields.forEach((field) => {
             if (!field.value.trim()) {
@@ -39,18 +59,18 @@ document.addEventListener('DOMContentLoaded', function () {
         return isValid;
     }
 
-    /** Cancel btn */
-    document.getElementById('cancelButton').addEventListener('click', function () {
-        window.location.href = 'index.php';
-    });
-
     /** Save btn */
-    document.getElementById('submitButton').addEventListener('click', function () {
+    submitButton.addEventListener('click', function () {
         console.log('Save button clicked.');
         if (validateForm()) {
             document.getElementById('product_form').submit();
         } else {
             alert('Please, submit required data.');
         }
+    });
+
+    /** Cancel btn */
+    cancelButton.addEventListener('click', function () {
+        window.location.href = 'index.php';
     });
 });
