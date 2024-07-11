@@ -5,9 +5,12 @@ use App\Book;
 use App\DVD;
 use App\Furniture;
 
+$firebaseCredentialsPath = getenv('GOOGLE_APPLICATION_CREDENTIALS');
+$firebaseDatabaseUrl = getenv('FIREBASE_DATABASE_URL');
+
 $factory = (new Factory)
-    ->withServiceAccount('../google-service-account.json')
-    ->withDatabaseUri('https://test-task-php-default-rtdb.europe-west1.firebasedatabase.app/');
+    ->withServiceAccount($firebaseCredentialsPath)
+    ->withDatabaseUri($firebaseDatabaseUrl);
 
 $database = $factory->createDatabase();
 $reference = $database->getReference('products');

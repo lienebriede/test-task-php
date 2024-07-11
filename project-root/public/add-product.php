@@ -5,10 +5,13 @@ use App\Book;
 use App\DVD;
 use App\Furniture;
 
-$factory = (new Factory)
-    ->withServiceAccount('../google-service-account.json')
-    ->withDatabaseUri('https://test-task-php-default-rtdb.europe-west1.firebasedatabase.app/');
+$firebaseCredentialsPath = getenv('GOOGLE_APPLICATION_CREDENTIALS');
+$firebaseDatabaseUrl = getenv('FIREBASE_DATABASE_URL');
 
+$factory = (new Factory)
+    ->withServiceAccount($firebaseCredentialsPath)
+    ->withDatabaseUri($firebaseDatabaseUrl);
+    
 $database = $factory->createDatabase();
 
 // Check for unique SKU
