@@ -42,10 +42,16 @@ hr {
     border: var(--teal);
 }
 
-.btn-primary:hover {
-    background-color: var(--darker-teal);
+.btn-primary:hover,
+.btn-primary:active {
+    background-color: var(--darker-teal) !important;
 }
 
 .size-input {
     display: none;
+}
+
+.form-check-input:checked {
+    background-color: var(--teal);
+    border-color: var(--teal);
 }

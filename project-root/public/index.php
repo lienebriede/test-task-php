@@ -52,13 +52,20 @@ foreach ($productsSnapshot->getValue() as $product) {
             </div>
         </div>
         <hr>
-            <ul class="list-group">
-            <?php foreach ($products as $product): ?>
-                <li class="list-group-item">
-                    <?php echo $product->display(); ?>
-                </li>
-            <?php endforeach; ?>
-            </ul>
+        <div class="container py-3">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-5">
+                <?php foreach ($products as $product): ?>
+                    <div class="col">
+                        <div class="card h-100">
+                            <input type="checkbox" class="text-left ms-2 mt-2 form-check-input delete-checkbox">
+                            <div class="card-body text-center mb-3">
+                                <?php echo $product->display(); ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
     </main>
     <footer class="footer container">
         <hr>

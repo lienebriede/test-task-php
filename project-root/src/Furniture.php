@@ -14,7 +14,6 @@ class Furniture extends Product {
     }
 
     public function save($database) {
-        echo "Saving Furniture to Firebase...\n";
         $reference = $database->getReference('products')->push([
             'sku' => $this->getSku(),
             'name' => $this->getName(),

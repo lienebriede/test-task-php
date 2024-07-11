@@ -10,7 +10,6 @@ class DVD extends Product {
     }
 
     public function save($database) {
-        echo "Saving DVD to Firebase...\n";
         $reference = $database->getReference('products')->push([
             'sku' => $this->getSku(),
             'name' => $this->getName(),

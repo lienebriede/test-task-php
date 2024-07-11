@@ -40,7 +40,6 @@ try {
             log_message("SKU Exists: " . ($skuExists ? 'true' : 'false'));
 
             header('Content-Type: application/json');
-            echo json_encode(['unique' => !$skuExists]);
             exit;
         }
     }
@@ -48,10 +47,8 @@ try {
     log_message("Invalid request");
 
     header('Content-Type: application/json');
-    echo json_encode(['error' => 'Invalid request']);
 } catch (Exception $e) {
     log_message("Error: " . $e->getMessage());
     header('Content-Type: application/json');
-    echo json_encode(['error' => 'Internal server error']);
 }
 ?>

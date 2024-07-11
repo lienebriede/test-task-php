@@ -118,3 +118,75 @@
 2024-07-11 13:02:10 - Database initialized
 2024-07-11 13:02:10 - SKU: HP020
 2024-07-11 13:02:10 - SKU Exists: false
+2024-07-11 13:46:15 - check_sku.php called
+2024-07-11 13:46:15 - Database initialized
+2024-07-11 13:46:15 - SKU: 
+2024-07-11 13:46:15 - SKU Exists: false
+2024-07-11 13:46:26 - check_sku.php called
+2024-07-11 13:46:26 - Database initialized
+2024-07-11 13:46:26 - SKU: 
+2024-07-11 13:46:26 - SKU Exists: false
+2024-07-11 13:46:28 - check_sku.php called
+2024-07-11 13:46:28 - Database initialized
+2024-07-11 13:46:28 - SKU: 
+2024-07-11 13:46:29 - SKU Exists: false
+2024-07-11 13:47:38 - check_sku.php called
+2024-07-11 13:47:38 - Database initialized
+2024-07-11 13:47:38 - SKU: 
+2024-07-11 13:47:38 - SKU Exists: false
+2024-07-11 13:47:44 - check_sku.php called
+2024-07-11 13:47:44 - Database initialized
+2024-07-11 13:47:44 - SKU: 
+2024-07-11 13:47:45 - SKU Exists: false
+2024-07-11 13:48:00 - check_sku.php called
+2024-07-11 13:48:00 - Database initialized
+2024-07-11 13:48:00 - SKU: 
+2024-07-11 13:48:00 - SKU Exists: false
+2024-07-11 13:48:04 - check_sku.php called
+2024-07-11 13:48:04 - Database initialized
+2024-07-11 13:48:04 - SKU: 
+2024-07-11 13:48:04 - SKU Exists: false
+2024-07-11 13:48:07 - check_sku.php called
+2024-07-11 13:48:07 - Database initialized
+2024-07-11 13:48:07 - SKU: 
+2024-07-11 13:48:07 - SKU Exists: false
+2024-07-11 13:48:42 - check_sku.php called
+2024-07-11 13:48:42 - Database initialized
+2024-07-11 13:48:42 - SKU: 
+2024-07-11 13:48:42 - SKU Exists: false
+2024-07-11 13:48:44 - check_sku.php called
+2024-07-11 13:48:44 - Database initialized
+2024-07-11 13:48:44 - SKU: 
+2024-07-11 13:48:45 - SKU Exists: false
+2024-07-11 13:52:38 - check_sku.php called
+2024-07-11 13:52:38 - Database initialized
+2024-07-11 13:52:38 - SKU: 
+2024-07-11 13:52:38 - SKU Exists: false
+2024-07-11 13:52:46 - check_sku.php called
+2024-07-11 13:52:46 - Database initialized
+2024-07-11 13:52:46 - SKU: 
+2024-07-11 13:52:46 - SKU Exists: false
+2024-07-11 13:52:54 - check_sku.php called
+2024-07-11 13:52:54 - Database initialized
+2024-07-11 13:52:54 - SKU: 
+2024-07-11 13:52:55 - SKU Exists: false
+2024-07-11 13:53:02 - check_sku.php called
+2024-07-11 13:53:02 - Database initialized
+2024-07-11 13:53:02 - SKU: HP001
+2024-07-11 13:53:02 - SKU Exists: true
+2024-07-11 13:53:11 - check_sku.php called
+2024-07-11 13:53:11 - Database initialized
+2024-07-11 13:53:11 - SKU: HP0001
+2024-07-11 13:53:12 - SKU Exists: false
+2024-07-11 13:53:18 - check_sku.php called
+2024-07-11 13:53:18 - Database initialized
+2024-07-11 13:53:18 - SKU: HP0001
+2024-07-11 13:53:18 - SKU Exists: false
+2024-07-11 13:53:26 - check_sku.php called
+2024-07-11 13:53:26 - Database initialized
+2024-07-11 13:53:26 - SKU: HP0001
+2024-07-11 13:53:27 - SKU Exists: false
+2024-07-11 13:53:31 - check_sku.php called
+2024-07-11 13:53:31 - Database initialized
+2024-07-11 13:53:31 - SKU: HP0001
+2024-07-11 13:53:31 - SKU Exists: false

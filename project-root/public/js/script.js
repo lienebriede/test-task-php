@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', function () {
         requiredFields.forEach((field) => {
             if (!field.value.trim()) {
                 isValid = false;
-                console.log(`Field "${field.id}" is empty.`);
             }
         });
 
@@ -66,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     /** Make AJAX request to check SKU uniqness */
     async function checkSKUUnique(sku) {
-        console.log('Checking SKU:', sku);
         try {
             const response = await fetch('check_sku.php', {
                 method: 'POST',
@@ -76,18 +74,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 body: JSON.stringify({ sku: sku }),
             });
 
-            console.log('Response status:', response.status);
-
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-
             const data = await response.json();
-            console.log('Response data:', data);
-
             return data.unique;
         } catch (error) {
-            console.error('Error:', error);
             return false;
         }
     }
@@ -110,7 +102,8 @@ document.addEventListener('DOMContentLoaded', function () {
             if (validateForm()) {
                 document.getElementById('product_form').submit();
             } else {
-                alert('Please submit required data.');
+                var myModal = new bootstrap.Modal(document.getElementById('customAlertModal'));
+                myModal.show();
             }
         });
     }
