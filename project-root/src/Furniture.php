@@ -6,9 +6,11 @@ class Furniture extends Product {
     private $width;
     private $length;
 
-    public function __construct($sku, $name, $price, $height = null, $width = null, $length = null) {
+    public function __construct($sku, $name, $price, $height, $width, $length) {
         parent::__construct($sku, $name, $price);
-        $this->dimensions = [];
+        $this->height = $height;
+        $this->width = $width;
+        $this->length = $length;
     }
 
     public function save($database) {
@@ -30,10 +32,12 @@ class Furniture extends Product {
     
     public function display() {
         return 
-        "SKU: {$this->sku}, 
-        Name: {$this->name}, 
-        Price: {$this->price} $, 
-        Dimensions: Height{$this->height} x Width{$this->width} x Length{$this->length} cm";
+        " 
+        <div>{$this->sku}</div>
+        <div>{$this->name}</div>
+        <div>{$this->price} $</div>
+        <div>Dimensions: {$this->height}x{$this->width}x{$this->length}</div>
+        ";
     }
 
     public function setDimensions($height, $width, $length) {

@@ -24,7 +24,12 @@ class Book extends Product {
     }
 
     public function display() {
-        return "SKU: {$this->sku}, Name: {$this->name}, Price: {$this->price} $, Weight: {$this->weight} Kg";
+        return "
+        <div>{$this->sku}</div>
+        <div>{$this->name}</div>
+        <div>{$this->price} $</div>
+        <div>Weight: {$this->weight} KG</div>
+        ";
     }
 
     public function getWeight() {

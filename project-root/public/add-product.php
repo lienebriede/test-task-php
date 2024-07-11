@@ -11,6 +11,7 @@ $factory = (new Factory)
 
 $database = $factory->createDatabase();
 
+// Check for unique SKU
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false) {
     $data = json_decode(file_get_contents('php://input'), true);
     if (isset($data['sku'])) {
@@ -26,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['CONTENT_TYPE']) && 
     }
 }
 
+// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $type = $_POST['type'];
     $sku = $_POST['sku'];
@@ -40,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // Create object
     if ($type === 'Book') {
         $weight = $_POST['weight'];
         $product = new Book($sku, $name, $price, $weight);
@@ -53,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $product = new Furniture($sku, $name, $price, $height, $width, $length);
     }
 
+    // Save object to database and redirect to display
     $product->save($database);
     header('Location: index.php');
     exit;

@@ -24,7 +24,12 @@ class DVD extends Product {
     }
 
     public function display() {
-        return "SKU: {$this->sku}, Name: {$this->name}, Price: {$this->price} $, Size: {$this->size} MB";
+        return "
+        <div>{$this->sku}</div>
+        <div>{$this->name}</div>
+        <div>{$this->price} $</div>
+        <div>Size: {$this->size} MB</div>
+        ";
     }
 
     public function getSize() {

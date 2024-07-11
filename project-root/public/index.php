@@ -1,6 +1,9 @@
 <?php
 require '../vendor/autoload.php';
 use Kreait\Firebase\Factory;
+use App\Book;
+use App\DVD;
+use App\Furniture;
 
 $factory = (new Factory)
     ->withServiceAccount('../google-service-account.json')
@@ -8,7 +11,19 @@ $factory = (new Factory)
 
 $database = $factory->createDatabase();
 $reference = $database->getReference('products');
-$products = $reference->getValue();
+
+$productsSnapshot = $reference->getSnapshot();
+
+$products = [];
+foreach ($productsSnapshot->getValue() as $product) {
+    if ($product['type'] === 'Book') {
+        $products[] = new Book($product['sku'], $product['name'], $product['price'], $product['weight']);
+    } elseif ($product['type'] === 'DVD') {
+        $products[] = new DVD($product['sku'], $product['name'], $product['price'], $product['size']);
+    } elseif ($product['type'] === 'Furniture') {
+        $products[] = new Furniture($product['sku'], $product['name'], $product['price'], $product['dimensions']['height'], $product['dimensions']['width'], $product['dimensions']['length']);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,11 +52,13 @@ $products = $reference->getValue();
             </div>
         </div>
         <hr>
-            <ul>
-                <?php foreach ($products as $product): ?>
-                    <li><?php echo htmlspecialchars($product['name']) . ' - ' . htmlspecialchars($product['price']) . ' $'; ?></li>
-                <?php endforeach; ?>
-            </ul>  
+            <ul class="list-group">
+            <?php foreach ($products as $product): ?>
+                <li class="list-group-item">
+                    <?php echo $product->display(); ?>
+                </li>
+            <?php endforeach; ?>
+            </ul>
     </main>
     <footer class="footer container">
         <hr>
