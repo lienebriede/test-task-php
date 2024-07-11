@@ -1,17 +1,17 @@
 <?php
-require '../vendor/autoload.php';
+require '/../vendor/autoload.php';
 use Kreait\Firebase\Factory;
 use App\Book;
 use App\DVD;
 use App\Furniture;
 
-$firebaseCredentialsPath = getenv('GOOGLE_APPLICATION_CREDENTIALS');
+$firebaseCredentialsPath = __DIR__ . '/../../google-service-account.json';
 $firebaseDatabaseUrl = getenv('FIREBASE_DATABASE_URL');
 
 $factory = (new Factory)
     ->withServiceAccount($firebaseCredentialsPath)
     ->withDatabaseUri($firebaseDatabaseUrl);
-    
+
 $database = $factory->createDatabase();
 
 // Check for unique SKU
