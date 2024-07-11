@@ -1,0 +1,88 @@
+2024-07-11 07:45:29 - check_sku.php called
+2024-07-11 07:45:29 - Database initialized
+2024-07-11 07:45:29 - SKU: 
+2024-07-11 07:45:29 - Error: Index not defined, add ".indexOn": "sku", for path "/products", to the rules
+2024-07-11 07:45:33 - check_sku.php called
+2024-07-11 07:45:33 - Database initialized
+2024-07-11 07:45:33 - SKU: 
+2024-07-11 07:45:34 - Error: Index not defined, add ".indexOn": "sku", for path "/products", to the rules
+2024-07-11 07:45:35 - check_sku.php called
+2024-07-11 07:45:35 - Database initialized
+2024-07-11 07:45:35 - SKU: 
+2024-07-11 07:45:35 - Error: Index not defined, add ".indexOn": "sku", for path "/products", to the rules
+2024-07-11 07:45:36 - check_sku.php called
+2024-07-11 07:45:36 - Database initialized
+2024-07-11 07:45:36 - SKU: 
+2024-07-11 07:45:36 - Error: Index not defined, add ".indexOn": "sku", for path "/products", to the rules
+2024-07-11 07:47:40 - check_sku.php called
+2024-07-11 07:47:40 - Database initialized
+2024-07-11 07:47:40 - SKU: 
+2024-07-11 07:47:41 - SKU Exists: true
+2024-07-11 07:48:11 - check_sku.php called
+2024-07-11 07:48:11 - Database initialized
+2024-07-11 07:48:11 - SKU: HP2000
+2024-07-11 07:48:11 - SKU Exists: false
+2024-07-11 07:48:17 - check_sku.php called
+2024-07-11 07:48:17 - Database initialized
+2024-07-11 07:48:17 - SKU: HP2000
+2024-07-11 07:48:17 - SKU Exists: false
+2024-07-11 07:48:23 - check_sku.php called
+2024-07-11 07:48:23 - Database initialized
+2024-07-11 07:48:23 - SKU: 
+2024-07-11 07:48:24 - SKU Exists: true
+2024-07-11 07:49:53 - check_sku.php called
+2024-07-11 07:49:53 - Database initialized
+2024-07-11 07:49:53 - SKU: 
+2024-07-11 07:49:53 - SKU Exists: false
+2024-07-11 07:49:57 - check_sku.php called
+2024-07-11 07:49:57 - Database initialized
+2024-07-11 07:49:57 - SKU: 
+2024-07-11 07:49:57 - SKU Exists: false
+2024-07-11 07:50:12 - check_sku.php called
+2024-07-11 07:50:12 - Database initialized
+2024-07-11 07:50:12 - SKU: HP001
+2024-07-11 07:50:12 - SKU Exists: true
+2024-07-11 07:50:16 - check_sku.php called
+2024-07-11 07:50:16 - Database initialized
+2024-07-11 07:50:16 - SKU: HP001
+2024-07-11 07:50:17 - SKU Exists: true
+2024-07-11 07:50:22 - check_sku.php called
+2024-07-11 07:50:22 - Database initialized
+2024-07-11 07:50:22 - SKU: HP001
+2024-07-11 07:50:22 - SKU Exists: true
+2024-07-11 07:50:29 - check_sku.php called
+2024-07-11 07:50:29 - Database initialized
+2024-07-11 07:50:29 - SKU: HP010
+2024-07-11 07:50:29 - SKU Exists: false
+2024-07-11 07:50:35 - check_sku.php called
+2024-07-11 07:50:35 - Database initialized
+2024-07-11 07:50:35 - SKU: HP010
+2024-07-11 07:50:35 - SKU Exists: false
+2024-07-11 08:02:46 - check_sku.php called
+2024-07-11 08:02:46 - Database initialized
+2024-07-11 08:02:46 - SKU: 
+2024-07-11 08:02:46 - SKU Exists: false
+2024-07-11 08:02:58 - check_sku.php called
+2024-07-11 08:02:58 - Database initialized
+2024-07-11 08:02:58 - SKU: 
+2024-07-11 08:02:58 - SKU Exists: false
+2024-07-11 08:03:08 - check_sku.php called
+2024-07-11 08:03:08 - Database initialized
+2024-07-11 08:03:08 - SKU: HP001
+2024-07-11 08:03:08 - SKU Exists: true
+2024-07-11 08:03:15 - check_sku.php called
+2024-07-11 08:03:15 - Database initialized
+2024-07-11 08:03:15 - SKU: HP011
+2024-07-11 08:03:15 - SKU Exists: false
+2024-07-11 08:07:07 - check_sku.php called
+2024-07-11 08:07:07 - Database initialized
+2024-07-11 08:07:07 - SKU: 
+2024-07-11 08:07:07 - SKU Exists: false
+2024-07-11 08:07:19 - check_sku.php called
+2024-07-11 08:07:19 - Database initialized
+2024-07-11 08:07:19 - SKU: 
+2024-07-11 08:07:20 - SKU Exists: false
+2024-07-11 08:09:14 - check_sku.php called
+2024-07-11 08:09:14 - Database initialized
+2024-07-11 08:09:14 - SKU: 
+2024-07-11 08:09:14 - SKU Exists: false

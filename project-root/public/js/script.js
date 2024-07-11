@@ -1,17 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
-
     const productTypeSelect = document.getElementById('productType');
     const submitButton = document.getElementById('submitButton');
     const cancelButton = document.getElementById('cancelButton');
+    const skuInput = document.getElementById('sku');
+    const skuError = document.getElementById('skuError');
+
     const typeFields = {
         'DVD': ['size'],
         'Furniture': ['height', 'width', 'length'],
         'Book': ['weight']
     };
 
-    productTypeSelect.addEventListener('change', function () {
-        switchType(this.value);
-    });
+    if (productTypeSelect) {
+        productTypeSelect.addEventListener('change', function () {
+            switchType(this.value);
+        });
+    }
 
     /** Type switcher function */
     function switchType(selectedType) {
@@ -30,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
     /** Manage required attribute */
     function toggleRequiredFields(fields, required) {
         fields.forEach(function (fieldId) {
@@ -59,18 +64,61 @@ document.addEventListener('DOMContentLoaded', function () {
         return isValid;
     }
 
-    /** Save btn */
-    submitButton.addEventListener('click', function () {
-        console.log('Save button clicked.');
-        if (validateForm()) {
-            document.getElementById('product_form').submit();
-        } else {
-            alert('Please, submit required data.');
+    /** Make AJAX request to check SKU uniqness */
+    async function checkSKUUnique(sku) {
+        console.log('Checking SKU:', sku);
+        try {
+            const response = await fetch('check_sku.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ sku: sku }),
+            });
+
+            console.log('Response status:', response.status);
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            console.log('Response data:', data);
+
+            return data.unique;
+        } catch (error) {
+            console.error('Error:', error);
+            return false;
         }
-    });
+    }
+
+
+    /** Save btn */
+    if (submitButton) {
+        submitButton.addEventListener('click', async function () {
+            if (!skuError) return;
+
+            skuError.classList.add('d-none');
+            const sku = skuInput.value.trim();
+            const isSKUUnique = await checkSKUUnique(sku);
+
+            if (!isSKUUnique) {
+                skuError.classList.remove('d-none');
+                return;
+            }
+
+            if (validateForm()) {
+                document.getElementById('product_form').submit();
+            } else {
+                alert('Please submit required data.');
+            }
+        });
+    }
 
     /** Cancel btn */
-    cancelButton.addEventListener('click', function () {
-        window.location.href = 'index.php';
-    });
+    if (cancelButton) {
+        cancelButton.addEventListener('click', function () {
+            window.location.href = 'index.php';
+        });
+    }
 });

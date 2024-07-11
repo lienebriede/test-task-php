@@ -11,11 +11,34 @@ $factory = (new Factory)
 
 $database = $factory->createDatabase();
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false) {
+    $data = json_decode(file_get_contents('php://input'), true);
+    if (isset($data['sku'])) {
+        $sku = $data['sku'];
+        $reference = $database->getReference('products')->orderByChild('sku')->equalTo($sku);
+        $snapshot = $reference->getSnapshot();
+
+        $skuExists = $snapshot->hasChildren();
+
+        header('Content-Type: application/json');
+        echo json_encode(['unique' => !$skuExists]);
+        exit;
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $type = $_POST['type'];
     $sku = $_POST['sku'];
     $name = $_POST['name'];
     $price = $_POST['price'];
+
+    $reference = $database->getReference('products')->orderByChild('sku')->equalTo($sku);
+    $snapshot = $reference->getSnapshot();
+
+    if ($snapshot->hasChildren()) {
+        echo 'SKU already exists.';
+        exit;
+    }
 
     if ($type === 'Book') {
         $weight = $_POST['weight'];
@@ -67,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="sku" class="col-2 col-form-label">SKU</label>
                 <div class="col-6">
                     <input type="text" class="form-control" id="sku" name="sku" required>
+                    <small id="skuError" class="text-danger d-none">SKU already exists.</small>
                 </div>
             </div>
             <div class="form-group row mb-3">
