@@ -1,11 +1,16 @@
 <?php
+
 if (getenv('ENVIRONMENT') === 'local') {
     require '../vendor/autoload.php'; // Local environment
     $firebaseCredentialsPath = __DIR__ . '/../google-service-account.json';
 } else {
     require __DIR__ . '/../vendor/autoload.php'; // Heroku or production environment
-    $firebaseCredentialsPath = getenv('GOOGLE_APPLICATION_CREDENTIALS');
+    $firebaseCredentialsPath =  __DIR__ . '/../google-service-account.json';
 }
+
+$firebaseDatabaseUrl = getenv('FIREBASE_DATABASE_URL');
+
+
 use Kreait\Firebase\Factory;
 use App\Book;
 use App\DVD;
@@ -18,10 +23,6 @@ error_reporting(E_ALL);
 // Logging for debugging purposes
 error_log('Script started: ' . date('Y-m-d H:i:s'));
 error_log('Current directory: ' . __DIR__);
-
-$firebaseCredentialsPath = __DIR__ . '/../google-service-account.json';
-$firebaseDatabaseUrl = getenv('FIREBASE_DATABASE_URL');
-
 
 // Check if credentials file exists and is readable
 if (!is_readable($firebaseCredentialsPath)) {
