@@ -132,7 +132,6 @@ document.addEventListener('DOMContentLoaded', function () {
     /** Save btn */
     if (submitButton) {
         submitButton.addEventListener('click', async function () {
-            if (!skuError) return;
 
             skuError.classList.add('d-none');
             const sku = skuInput.value.trim();

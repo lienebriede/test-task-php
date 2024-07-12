@@ -1,5 +1,5 @@
 <?php
-require '../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 use Kreait\Firebase\Factory;
 
 // Define logging function
@@ -13,11 +13,15 @@ function log_message($message) {
 
 try {
     // Initialize Firebase
+    $firebaseCredentialsPath = __DIR__ . '/../google-service-account.json'; // Adjust the path as necessary
+    $firebaseDatabaseUrl = getenv('FIREBASE_DATABASE_URL'); // Adjust environment variable name if needed
+
     $factory = (new Factory)
-        ->withServiceAccount('../google-service-account.json')
-        ->withDatabaseUri('https://test-task-php-default-rtdb.europe-west1.firebasedatabase.app/');
+        ->withServiceAccount($firebaseCredentialsPath)
+        ->withDatabaseUri($firebaseDatabaseUrl);
 
     $database = $factory->createDatabase();
+
 
     // Handle mass delete operation
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false) {

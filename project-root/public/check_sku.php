@@ -1,5 +1,5 @@
 <?php
-require '../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 use Kreait\Firebase\Factory;
 
 // Enable error reporting
@@ -19,9 +19,13 @@ function log_message($message) {
 log_message("check_sku.php called");
 
 try {
+    // Initialize Firebase database
+    $firebaseCredentialsPath = __DIR__ . '/../google-service-account.json'; // Adjust the path as necessary
+    $firebaseDatabaseUrl = getenv('FIREBASE_DATABASE_URL'); // Adjust environment variable name if needed
+
     $factory = (new Factory)
-        ->withServiceAccount('../google-service-account.json')
-        ->withDatabaseUri('https://test-task-php-default-rtdb.europe-west1.firebasedatabase.app/');
+        ->withServiceAccount($firebaseCredentialsPath)
+        ->withDatabaseUri($firebaseDatabaseUrl);
 
     $database = $factory->createDatabase();
 
@@ -40,6 +44,7 @@ try {
             log_message("SKU Exists: " . ($skuExists ? 'true' : 'false'));
 
             header('Content-Type: application/json');
+            echo json_encode(['unique' => !$skuExists]);
             exit;
         }
     }
