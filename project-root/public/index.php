@@ -1,34 +1,35 @@
 <?php
 
-if (getenv('ENVIRONMENT') === 'local') {
-    require '../vendor/autoload.php'; // Local environment
-    $firebaseCredentialsPath = __DIR__ . '/../google-service-account.json';
-} else {
-    require __DIR__ . '/../vendor/autoload.php'; // Heroku or production environment
-    $firebaseCredentialsPath =  __DIR__ . '/../google-service-account.json';
-}
-
-$firebaseDatabaseUrl = getenv('FIREBASE_DATABASE_URL');
-
+require __DIR__ . '/../vendor/autoload.php';
 
 use Kreait\Firebase\Factory;
 use App\Book;
 use App\DVD;
 use App\Furniture;
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// Logging for debugging purposes
-error_log('Script started: ' . date('Y-m-d H:i:s'));
-error_log('Current directory: ' . __DIR__);
-
-// Check if credentials file exists and is readable
-if (!is_readable($firebaseCredentialsPath)) {
-    error_log('Firebase credentials file is not readable: ' . $firebaseCredentialsPath);
-    die('Firebase credentials file is not readable.');
+if (getenv('ENVIRONMENT') === 'local') {
+    require '../vendor/autoload.php'; // Local environment
+    $firebaseCredentialsPath = __DIR__ . '/../google-service-account.json';
+} else {
+    require __DIR__ . '/../vendor/autoload.php'; // Heroku or production environment
+    $firebaseCredentialsPath = __DIR__ . '/../google-service-account.json';
+    
+    // Write the GOOGLE_CREDENTIALS_JSON content to a file
+    $firebaseCredentialsContent = getenv('GOOGLE_CREDENTIALS_JSON');
+    if ($firebaseCredentialsContent) {
+        file_put_contents($firebaseCredentialsPath, $firebaseCredentialsContent);
+    } else {
+        error_log('GOOGLE_CREDENTIALS_JSON environment variable is not set or empty.');
+        die('GOOGLE_CREDENTIALS_JSON environment variable is not set or empty.');
+    }
 }
+
+$firebaseDatabaseUrl = getenv('FIREBASE_DATABASE_URL');
+if (!$firebaseDatabaseUrl) {
+    error_log('FIREBASE_DATABASE_URL environment variable is not set or empty.');
+    die('FIREBASE_DATABASE_URL environment variable is not set or empty.');
+}
+
 
 $factory = (new Factory)
     ->withServiceAccount($firebaseCredentialsPath)
