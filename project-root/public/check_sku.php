@@ -1,44 +1,49 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../src/ProductService.php';
 
 use App\Service\ProductService;
+use App\Service\ResponseHandler;
 
-// Enable error reporting
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+class SKUValidationHandler {
+    private $productService;
+    private $responseHandler;
 
-// Configuration
+    public function __construct(ProductService $productService, ResponseHandler $responseHandler) {
+        $this->productService = $productService;
+        $this->responseHandler = $responseHandler;
+    }
+
+    public function handleRequest() {
+        try {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && $this->isJsonRequest()) {
+                $data = json_decode(file_get_contents('php://input'), true);
+                if (isset($data['sku'])) {
+                    $skuExists = $this->productService->checkSku($data['sku']);
+                    $this->responseHandler->sendJsonResponse(['unique' => !$skuExists]);
+                } else {
+                    throw new Exception("SKU parameter missing");
+                }
+            } else {
+                throw new Exception("Invalid request");
+            }
+        } catch (Exception $e) {
+            $this->productService->logMessage("Error: " . $e->getMessage());
+            $this->responseHandler->sendJsonResponse(['error' => $e->getMessage()], 400);
+        }
+    }
+
+    private function isJsonRequest() {
+        return isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false;
+    }
+}
+
 $firebaseCredentialsPath = __DIR__ . '/../google-service-account.json';
 $firebaseDatabaseUrl = getenv('FIREBASE_DATABASE_URL');
 $logFile = __DIR__ . '/../logs/debug.log';
 
-// Initialize ProductService
 $productService = new ProductService($firebaseCredentialsPath, $firebaseDatabaseUrl, $logFile);
+$responseHandler = new ResponseHandler();
 
-try {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false) {
-        $data = json_decode(file_get_contents('php://input'), true);
-
-        if (isset($data['sku'])) {
-            $sku = $data['sku'];
-
-            $skuExists = $productService->checkSku($sku);
-
-            header('Content-Type: application/json');
-            echo json_encode(['unique' => !$skuExists]);
-            exit;
-        }
-    }
-
-    // Invalid request handling
-    $productService->logMessage("Invalid request");
-    header('Content-Type: application/json');
-    echo json_encode(['error' => 'Invalid request']);
-} catch (Exception $e) {
-    $productService->logMessage("Error: " . $e->getMessage());
-    header('Content-Type: application/json');
-    echo json_encode(['error' => 'Internal server error']);
-}
+$handler = new SKUValidationHandler($productService, $responseHandler);
+$handler->handleRequest();
 ?>

@@ -3,9 +3,13 @@ require __DIR__ . '/../config/config.php';
 require __DIR__ . '/../config/init.php'; // Include initialization
 
 use App\ProductFactory;
+use App\Service\ResponseHandler;
 use App\Book;
 use App\DVD;
 use App\Furniture;
+
+// Create instance of ResponseHandler
+$responseHandler = new ResponseHandler();
 
 // Check for unique SKU
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false) {
@@ -17,10 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['CONTENT_TYPE']) && 
 
         $skuExists = $snapshot->hasChildren();
 
-        header('Content-Type: application/json');
-        echo json_encode(['unique' => !$skuExists]);
-        exit;
+        $responseHandler->sendJsonResponse(['unique' => !$skuExists]);
     }
+    exit; // Ensure the script stops after sending a response
 }
 
 // Handle form submission
@@ -31,8 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = $_POST['price'];
 
     if (!is_numeric($price)) {
-        echo 'Price must be numeric.';
-        exit;
+        $responseHandler->sendJsonResponse(['error' => 'Price must be numeric.'], 400);
     }
     $price = (float)$price;
 
@@ -40,8 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $snapshot = $reference->getSnapshot();
 
     if ($snapshot->hasChildren()) {
-        echo 'SKU already exists.';
-        exit;
+        $responseHandler->sendJsonResponse(['error' => 'SKU already exists.'], 400);
     }
 
     $productData = [
@@ -67,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
