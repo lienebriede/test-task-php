@@ -36,6 +36,9 @@ abstract class Product {
     }
 
     public function setPrice($price) {
+        if (!is_numeric($price)) {
+            throw new \InvalidArgumentException("Price must be a numeric value.");
+        }
         $this->price = $price;
     }
 }

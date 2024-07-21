@@ -8,9 +8,7 @@ class Furniture extends Product {
 
     public function __construct($sku, $name, $price, $height, $width, $length) {
         parent::__construct($sku, $name, $price);
-        $this->height = $height;
-        $this->width = $width;
-        $this->length = $length;
+        $this->setDimensions($height, $width, $length);
     }
 
     public function save($database) {
@@ -40,12 +38,19 @@ class Furniture extends Product {
     }
 
     public function setDimensions($height, $width, $length) {
+        if (!is_numeric($height) || !is_numeric($width) || !is_numeric($length)) {
+            throw new \InvalidArgumentException("All dimensions must be numeric values.");
+        }
         $this->height = $height;
         $this->width = $width;
         $this->length = $length;
     }
     
     public function getDimensions() {
-        return $this->dimensions;
+        return [
+            'height' => $this->height,
+            'width' => $this->width,
+            'length' => $this->length
+        ];
     }
 }

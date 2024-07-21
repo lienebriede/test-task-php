@@ -434,3 +434,38 @@
 2024-07-12 11:34:47 - SKU Exists: false
 2024-07-12 11:35:48 - Product with SKU HP0010 deleted successfully
 2024-07-12 11:35:48 - Product with SKU HP00100 deleted successfully
+2024-07-21 14:50:08 - Checking SKU: HP001
+2024-07-21 14:50:08 - SKU Exists: false
+2024-07-21 14:50:16 - Checking SKU: HP001
+2024-07-21 14:50:16 - SKU Exists: false
+2024-07-21 14:50:36 - Checking SKU: HP001
+2024-07-21 14:50:36 - SKU Exists: false
+2024-07-21 14:50:40 - Checking SKU: HP001
+2024-07-21 14:50:40 - SKU Exists: false
+2024-07-21 14:58:32 - Checking SKU: 
+2024-07-21 14:58:33 - SKU Exists: false
+2024-07-21 14:58:43 - Checking SKU: 
+2024-07-21 14:58:43 - SKU Exists: false
+2024-07-21 14:58:59 - Checking SKU: HP001
+2024-07-21 14:59:00 - SKU Exists: false
+2024-07-21 14:59:06 - Checking SKU: HP001
+2024-07-21 14:59:06 - SKU Exists: false
+2024-07-21 14:59:27 - Checking SKU: HP001
+2024-07-21 14:59:27 - SKU Exists: false
+2024-07-21 14:59:34 - Checking SKU: HP001
+2024-07-21 14:59:34 - SKU Exists: false
+2024-07-21 15:00:06 - Checking SKU: HP001
+2024-07-21 15:00:06 - SKU Exists: true
+2024-07-21 15:00:15 - Checking SKU: HP00101
+2024-07-21 15:00:15 - SKU Exists: false
+2024-07-21 15:00:21 - Checking SKU: HP00101
+2024-07-21 15:00:21 - SKU Exists: false
+2024-07-21 15:00:27 - Checking SKU: HP00101
+2024-07-21 15:00:27 - SKU Exists: false
+2024-07-21 15:00:49 - Checking SKU: HP00101
+2024-07-21 15:00:49 - SKU Exists: false
+2024-07-21 15:00:56 - Checking SKU: HP00101
+2024-07-21 15:00:56 - SKU Exists: false
+2024-07-21 15:01:08 - Product with SKU asd deleted successfully
+2024-07-21 15:01:08 - Product with SKU HP001 deleted successfully
+2024-07-21 15:01:08 - Product with SKU HP00101 deleted successfully

@@ -36,6 +36,9 @@ class DVD extends Product {
     }
 
     public function setSize($size) {
+        if (!is_numeric($size)) {
+            throw new \InvalidArgumentException("Size must be a numeric value.");
+        }
         $this->size = $size;
     }
 }

@@ -1,39 +1,8 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php';
-
-use Kreait\Firebase\Factory;
+require __DIR__ . '/../config/config.php';
 use App\Book;
 use App\DVD;
 use App\Furniture;
-
-if (getenv('ENVIRONMENT') === 'local') {
-    require '../vendor/autoload.php'; // Local environment
-    $firebaseCredentialsPath = __DIR__ . '/../google-service-account.json';
-} else {
-    require __DIR__ . '/../vendor/autoload.php'; // Heroku or production environment
-    $firebaseCredentialsPath = __DIR__ . '/../google-service-account.json';
-    
-    // Write the GOOGLE_CREDENTIALS_JSON content to a file
-    $firebaseCredentialsContent = getenv('GOOGLE_CREDENTIALS_JSON');
-    if ($firebaseCredentialsContent) {
-        file_put_contents($firebaseCredentialsPath, $firebaseCredentialsContent);
-    } else {
-        error_log('GOOGLE_CREDENTIALS_JSON environment variable is not set or empty.');
-        die('GOOGLE_CREDENTIALS_JSON environment variable is not set or empty.');
-    }
-}
-
-$firebaseDatabaseUrl = getenv('FIREBASE_DATABASE_URL');
-if (!$firebaseDatabaseUrl) {
-    error_log('FIREBASE_DATABASE_URL environment variable is not set or empty.');
-    die('FIREBASE_DATABASE_URL environment variable is not set or empty.');
-}
-
-$factory = (new Factory)
-    ->withServiceAccount($firebaseCredentialsPath)
-    ->withDatabaseUri($firebaseDatabaseUrl);
-
-$database = $factory->createDatabase();
 
 // Check for unique SKU
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false) {
@@ -58,6 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $price = $_POST['price'];
 
+    if (!is_numeric($price)) {
+        echo 'Price must be numeric.';
+        exit;
+    }
+    $price = (float)$price;
+
     $reference = $database->getReference('products')->orderByChild('sku')->equalTo($sku);
     $snapshot = $reference->getSnapshot();
 
@@ -69,14 +44,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Create object
     if ($type === 'Book') {
         $weight = $_POST['weight'];
+        if (!is_numeric($weight)) {
+            echo 'Weight must be numeric.';
+            exit;
+        }
+        $weight = (float)$weight;
         $product = new Book($sku, $name, $price, $weight);
     } elseif ($type === 'DVD') {
         $size = $_POST['size'];
+        if (!is_numeric($size)) {
+            echo 'Size must be numeric.';
+            exit;
+        }
+        $size = (float)$size;
         $product = new DVD($sku, $name, $price, $size);
     } elseif ($type === 'Furniture') {
         $height = $_POST['height'];
         $width = $_POST['width'];
         $length = $_POST['length'];
+        if (!is_numeric($height) || !is_numeric($width) || !is_numeric($length)) {
+            echo 'Dimensions must be numeric.';
+            exit;
+        }
+        $height = (float)$height;
+        $width = (float)$width;
+        $length = (float)$length;
         $product = new Furniture($sku, $name, $price, $height, $width, $length);
     }
 
@@ -131,6 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="price" class="col-2 col-form-label">Price($)</label>
                 <div class="col-6">
                     <input type="text" class="form-control" id="price" name="price" required>
+                    <small id="priceError" class="text-danger d-none">Price must be a numeric value.</small>
                 </div>
             </div>
 
@@ -152,6 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="size" class="col-3 col-form-label">Size (MB)</label>
                     <div class="col-3">
                         <input type="text" id="size" name="size" class="form-control">
+                        <small id="sizeError" class="text-danger d-none">Size must be a numeric value.</small>
                     </div>
                 </div>
             </div>
@@ -162,18 +156,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="height" class="col-3 col-form-label">Height (CM)</label>
                     <div class="col-3">
                         <input type="text" id="height" name="height" class="form-control">
+                        <small id="heightError" class="text-danger d-none">Height must be a numeric value.</small>
                     </div>
                 </div>  
                 <div class="form-group row mb-3">  
                     <label for="width" class="col-3 col-form-label">Width (CM)</label>
                     <div class="col-3">
                         <input type="text" id="width" name="width" class="form-control">
+                        <small id="widthError" class="text-danger d-none">Width must be a numeric value.</small>
                     </div>
                 </div>
                 <div class="form-group row mb-3">
                     <label for="length" class="col-3 col-form-label">Length (CM)</label>
                     <div class="col-3">
                         <input type="text" id="length" name="length" class="form-control">
+                        <small id="lengthError" class="text-danger d-none">Length must be a numeric value.</small>
                     </div>
                 </div>
             </div>
@@ -184,6 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="weight" class="col-3 col-form-label">Weight (KG)</label>
                     <div class="col-3">
                         <input type="text" id="weight" name="weight" class="form-control">
+                        <small id="weightError" class="text-danger d-none">Weight must be a numeric value.</small>
                     </div>
                 </div>
             </div>

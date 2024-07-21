@@ -1,53 +1,29 @@
 <?php
-
-require __DIR__ . '/../vendor/autoload.php';
-
-use Kreait\Firebase\Factory;
+require __DIR__ . '/../config/config.php';
 use App\Book;
 use App\DVD;
 use App\Furniture;
 
-if (getenv('ENVIRONMENT') === 'local') {
-    require '../vendor/autoload.php'; // Local environment
-    $firebaseCredentialsPath = __DIR__ . '/../google-service-account.json';
-} else {
-    require __DIR__ . '/../vendor/autoload.php'; // Heroku or production environment
-    $firebaseCredentialsPath = __DIR__ . '/../google-service-account.json';
-    
-    // Write the GOOGLE_CREDENTIALS_JSON content to a file
-    $firebaseCredentialsContent = getenv('GOOGLE_CREDENTIALS_JSON');
-    if ($firebaseCredentialsContent) {
-        file_put_contents($firebaseCredentialsPath, $firebaseCredentialsContent);
-    } else {
-        error_log('GOOGLE_CREDENTIALS_JSON environment variable is not set or empty.');
-        die('GOOGLE_CREDENTIALS_JSON environment variable is not set or empty.');
-    }
-}
-
-$firebaseDatabaseUrl = getenv('FIREBASE_DATABASE_URL');
-if (!$firebaseDatabaseUrl) {
-    error_log('FIREBASE_DATABASE_URL environment variable is not set or empty.');
-    die('FIREBASE_DATABASE_URL environment variable is not set or empty.');
-}
-
-
-$factory = (new Factory)
-    ->withServiceAccount($firebaseCredentialsPath)
-    ->withDatabaseUri($firebaseDatabaseUrl);
-
-$database = $factory->createDatabase();
 $reference = $database->getReference('products');
-
 $productsSnapshot = $reference->getSnapshot();
 
 $products = [];
 foreach ($productsSnapshot->getValue() as $product) {
     if ($product['type'] === 'Book') {
-        $products[] = new Book($product['sku'], $product['name'], $product['price'], $product['weight']);
+        $weight = isset($product['weight']) ? (float)$product['weight'] : 0;
+        $price = isset($product['price']) ? (float)$product['price'] : 0;
+        $products[] = new Book($product['sku'], $product['name'], $price, $weight);
     } elseif ($product['type'] === 'DVD') {
-        $products[] = new DVD($product['sku'], $product['name'], $product['price'], $product['size']);
+        $size = isset($product['size']) ? (float)$product['size'] : 0;
+        $price = isset($product['price']) ? (float)$product['price'] : 0;
+        $products[] = new DVD($product['sku'], $product['name'], $price, $size);
     } elseif ($product['type'] === 'Furniture') {
-        $products[] = new Furniture($product['sku'], $product['name'], $product['price'], $product['dimensions']['height'], $product['dimensions']['width'], $product['dimensions']['length']);
+        $dimensions = isset($product['dimensions']) ? $product['dimensions'] : [];
+        $height = isset($dimensions['height']) ? (float)$dimensions['height'] : 0;
+        $width = isset($dimensions['width']) ? (float)$dimensions['width'] : 0;
+        $length = isset($dimensions['length']) ? (float)$dimensions['length'] : 0;
+        $price = isset($product['price']) ? (float)$product['price'] : 0;
+        $products[] = new Furniture($product['sku'], $product['name'], $price, $height, $width, $length);
     }
 }
 ?>

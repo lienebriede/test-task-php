@@ -36,6 +36,9 @@ class Book extends Product {
     }
     
     public function setWeight($weight) {
+        if (!is_numeric($weight)) {
+            throw new \InvalidArgumentException("Weight must be a numeric value.");
+        }
         $this->weight = $weight;
     }
 }

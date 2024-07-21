@@ -51,6 +51,38 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    /** Validate numeric fields */
+    function validateNumericFields() {
+        let isValid = true;
+        const numericFields = {
+            'price': 'Price',
+            'size': 'Size',
+            'height': 'Height',
+            'width': 'Width',
+            'length': 'Length',
+            'weight': 'Weight'
+        };
+
+        for (let [fieldId, fieldName] of Object.entries(numericFields)) {
+            const field = document.getElementById(fieldId);
+            const errorElement = document.getElementById(`${fieldId}Error`);
+            if (field && errorElement) {
+                if (field.value.trim() && !isNumeric(field.value.trim())) {
+                    errorElement.classList.remove('d-none');
+                    isValid = false;
+                } else {
+                    errorElement.classList.add('d-none');
+                }
+            }
+        }
+        return isValid;
+    }
+
+    /** Check if value is numeric */
+    function isNumeric(value) {
+        return !isNaN(parseFloat(value)) && isFinite(value);
+    }
+
     /** Form data validation */
     function validateForm() {
         let isValid = true;
@@ -62,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        return isValid;
+        return isValid && validateNumericFields();
     }
 
     /** Make AJAX request to check SKU uniqness */
