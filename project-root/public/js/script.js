@@ -15,24 +15,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (productTypeSelect) {
         productTypeSelect.addEventListener('change', function () {
-            switchType(this.value);
+            const selectedType = this.value;
+            updateFieldsVisibility(selectedType);
         });
     }
 
-    /** Type switcher function */
-    function switchType(selectedType) {
+    /** Update fields visibility */
+    function updateFieldsVisibility(selectedType) {
         const types = Object.keys(typeFields);
 
         types.forEach(function (type) {
             const element = document.getElementById(type);
-            if (type === selectedType) {
-                element.classList.remove('d-none');
-                element.classList.add('d-block');
-                toggleRequiredFields(typeFields[type], true);
-            } else {
-                element.classList.remove('d-block');
-                element.classList.add('d-none');
-                toggleRequiredFields(typeFields[type], false);
+            if (element) {
+                element.classList.toggle('d-none', type !== selectedType);
+                element.classList.toggle('d-block', type === selectedType);
+                toggleRequiredFields(typeFields[type], type === selectedType);
             }
         });
     }
@@ -42,11 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         fields.forEach(function (fieldId) {
             const field = document.getElementById(fieldId);
             if (field) {
-                if (required) {
-                    field.setAttribute('required', 'required');
-                } else {
-                    field.removeAttribute('required');
-                }
+                field.toggleAttribute('required', required);
             }
         });
     }
@@ -97,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return isValid && validateNumericFields();
     }
 
-    /** Make AJAX request to check SKU uniqness */
+    /** Make AJAX request to check SKU uniqueness */
     async function checkSKUUnique(sku) {
         try {
             const response = await fetch('check_sku.php', {
@@ -118,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    /** Mass delete btn */
+    /** Mass delete button */
     if (massDeleteButton) {
         massDeleteButton.addEventListener('click', function () {
             const deleteIds = [];
@@ -151,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => {
                 if (response.ok) {
                     console.log('Products deleted successfully.');
-                    location.reload(); // Reload the page to reflect changes
+                    location.reload();
                 } else {
                     throw new Error('Failed to delete products.');
                 }
@@ -161,10 +154,9 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 
-    /** Save btn */
+    /** Save button */
     if (submitButton) {
         submitButton.addEventListener('click', async function () {
-
             skuError.classList.add('d-none');
             const sku = skuInput.value.trim();
             const isSKUUnique = await checkSKUUnique(sku);
@@ -183,10 +175,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    /** Cancel btn */
+    /** Cancel button */
     if (cancelButton) {
         cancelButton.addEventListener('click', function () {
             window.location.href = 'index.php';
         });
     }
+
+    // Initial setup: hide all fields initially
+    updateFieldsVisibility('');
 });

@@ -1,30 +1,26 @@
 <?php
 require __DIR__ . '/../config/config.php';
-use App\Book;
-use App\DVD;
-use App\Furniture;
+require __DIR__ . '/../config/init.php';
+
+use App\ProductFactory;
 
 $reference = $database->getReference('products');
 $productsSnapshot = $reference->getSnapshot();
 
 $products = [];
 foreach ($productsSnapshot->getValue() as $product) {
-    if ($product['type'] === 'Book') {
-        $weight = isset($product['weight']) ? (float)$product['weight'] : 0;
-        $price = isset($product['price']) ? (float)$product['price'] : 0;
-        $products[] = new Book($product['sku'], $product['name'], $price, $weight);
-    } elseif ($product['type'] === 'DVD') {
-        $size = isset($product['size']) ? (float)$product['size'] : 0;
-        $price = isset($product['price']) ? (float)$product['price'] : 0;
-        $products[] = new DVD($product['sku'], $product['name'], $price, $size);
-    } elseif ($product['type'] === 'Furniture') {
-        $dimensions = isset($product['dimensions']) ? $product['dimensions'] : [];
-        $height = isset($dimensions['height']) ? (float)$dimensions['height'] : 0;
-        $width = isset($dimensions['width']) ? (float)$dimensions['width'] : 0;
-        $length = isset($dimensions['length']) ? (float)$dimensions['length'] : 0;
-        $price = isset($product['price']) ? (float)$product['price'] : 0;
-        $products[] = new Furniture($product['sku'], $product['name'], $price, $height, $width, $length);
-    }
+    $productData = [
+        'type' => $product['type'],
+        'sku' => $product['sku'],
+        'name' => $product['name'],
+        'price' => isset($product['price']) ? (float)$product['price'] : 0,
+        'weight' => isset($product['weight']) ? (float)$product['weight'] : 0,
+        'size' => isset($product['size']) ? (float)$product['size'] : 0,
+        'dimensions' => isset($product['dimensions']) ? $product['dimensions'] : []
+    ];
+
+    // Create a product instance via the factory
+    $products[] = ProductFactory::createProduct($productData);
 }
 ?>
 

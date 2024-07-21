@@ -1,5 +1,8 @@
 <?php
 require __DIR__ . '/../config/config.php';
+require __DIR__ . '/../config/init.php'; // Include initialization
+
+use App\ProductFactory;
 use App\Book;
 use App\DVD;
 use App\Furniture;
@@ -41,36 +44,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Create object
-    if ($type === 'Book') {
-        $weight = $_POST['weight'];
-        if (!is_numeric($weight)) {
-            echo 'Weight must be numeric.';
-            exit;
-        }
-        $weight = (float)$weight;
-        $product = new Book($sku, $name, $price, $weight);
-    } elseif ($type === 'DVD') {
-        $size = $_POST['size'];
-        if (!is_numeric($size)) {
-            echo 'Size must be numeric.';
-            exit;
-        }
-        $size = (float)$size;
-        $product = new DVD($sku, $name, $price, $size);
-    } elseif ($type === 'Furniture') {
-        $height = $_POST['height'];
-        $width = $_POST['width'];
-        $length = $_POST['length'];
-        if (!is_numeric($height) || !is_numeric($width) || !is_numeric($length)) {
-            echo 'Dimensions must be numeric.';
-            exit;
-        }
-        $height = (float)$height;
-        $width = (float)$width;
-        $length = (float)$length;
-        $product = new Furniture($sku, $name, $price, $height, $width, $length);
-    }
+    $productData = [
+        'type' => $type,
+        'sku' => $sku,
+        'name' => $name,
+        'price' => $price,
+        'weight' => $_POST['weight'] ?? null,
+        'size' => $_POST['size'] ?? null,
+        'dimensions' => [
+            'height' => $_POST['height'] ?? null,
+            'width' => $_POST['width'] ?? null,
+            'length' => $_POST['length'] ?? null,
+        ]
+    ];
+
+    // Create object using the factory
+    $product = ProductFactory::createProduct($productData);
 
     // Save object to database and redirect to display
     $product->save($database);
