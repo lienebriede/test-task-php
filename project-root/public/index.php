@@ -19,7 +19,6 @@ foreach ($productsSnapshot->getValue() as $product) {
         'dimensions' => isset($product['dimensions']) ? $product['dimensions'] : []
     ];
 
-    // Create a product instance via the factory
     $products[] = ProductFactory::createProduct($productData);
 }
 ?>

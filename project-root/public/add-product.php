@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/../config/config.php';
-require __DIR__ . '/../config/init.php'; // Include initialization
+require __DIR__ . '/../config/init.php';
 
 use App\ProductFactory;
 use App\Service\ResponseHandler;
@@ -8,7 +8,6 @@ use App\Book;
 use App\DVD;
 use App\Furniture;
 
-// Create instance of ResponseHandler
 $responseHandler = new ResponseHandler();
 
 // Check for unique SKU
@@ -23,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['CONTENT_TYPE']) && 
 
         $responseHandler->sendJsonResponse(['unique' => !$skuExists]);
     }
-    exit; // Ensure the script stops after sending a response
+    exit;
 }
 
 // Handle form submission

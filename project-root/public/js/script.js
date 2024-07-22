@@ -182,6 +182,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Initial setup: hide all fields initially
+    // Initiallly hide all fields
     updateFieldsVisibility('');
 });
